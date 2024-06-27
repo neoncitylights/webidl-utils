@@ -1,0 +1,16 @@
+mod with_attributes;
+mod with_docstring;
+mod with_generics;
+mod with_identifier;
+mod with_optional_identifier;
+mod with_readonly;
+mod with_return_type;
+mod with_type;
+pub use with_attributes::*;
+pub use with_docstring::*;
+pub use with_generics::*;
+pub use with_identifier::*;
+pub use with_optional_identifier::*;
+pub use with_readonly::*;
+pub use with_return_type::*;
+pub use with_type::*;
