@@ -398,9 +398,7 @@ mod extend_frozen_array {
 
 	#[test]
 	fn test_new() {
-		let f = FrozenArrayType::new(Type::Single(SingleType::NonAny(
-			NonAnyType::boolean(),
-		)));
+		let f = FrozenArrayType::new(Type::Single(SingleType::NonAny(NonAnyType::boolean())));
 
 		assert_eq!(f.frozen_array, FrozenArray);
 		assert_eq!(

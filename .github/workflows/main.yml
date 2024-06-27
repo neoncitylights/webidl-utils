@@ -174,7 +174,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - crate: my-crate
+          - crate: webidl-utils
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
