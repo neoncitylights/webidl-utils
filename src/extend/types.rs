@@ -5,7 +5,7 @@ use weedle::types::*;
 /// Extension methods for `MayBeNull<T>`
 pub trait ExtendMayBeNull<T> {
 	fn new(type_: T, q_mark: Option<QMark>) -> Self;
-	fn new_non_required(type_: T) -> Self;
+	fn new_optional(type_: T) -> Self;
 	fn new_required(type_: T) -> Self;
 	fn is_optional(&self) -> bool;
 }
@@ -15,7 +15,7 @@ impl<T> ExtendMayBeNull<T> for MayBeNull<T> {
 		Self { type_, q_mark }
 	}
 
-	fn new_non_required(type_: T) -> Self {
+	fn new_optional(type_: T) -> Self {
 		Self::new(type_, Some(QMark))
 	}
 

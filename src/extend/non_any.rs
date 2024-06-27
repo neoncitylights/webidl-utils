@@ -109,7 +109,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn integer_opt(i: IntegerType) -> Self {
-		Self::Integer(MayBeNull::new_non_required(i))
+		Self::Integer(MayBeNull::new_optional(i))
 	}
 
 	fn floating_point(f: FloatingPointType) -> Self {
@@ -117,7 +117,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn floating_point_opt(f: FloatingPointType) -> Self {
-		Self::FloatingPoint(MayBeNull::new_non_required(f))
+		Self::FloatingPoint(MayBeNull::new_optional(f))
 	}
 
 	fn boolean() -> Self {
@@ -125,7 +125,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn boolean_opt() -> Self {
-		Self::Boolean(MayBeNull::new_non_required(Boolean))
+		Self::Boolean(MayBeNull::new_optional(Boolean))
 	}
 
 	fn byte() -> Self {
@@ -133,7 +133,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn byte_opt() -> Self {
-		Self::Byte(MayBeNull::new_non_required(Byte))
+		Self::Byte(MayBeNull::new_optional(Byte))
 	}
 
 	fn octet() -> Self {
@@ -141,7 +141,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn octet_opt() -> Self {
-		Self::Octet(MayBeNull::new_non_required(Octet))
+		Self::Octet(MayBeNull::new_optional(Octet))
 	}
 
 	fn byte_string() -> Self {
@@ -149,7 +149,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn byte_string_opt() -> Self {
-		Self::ByteString(MayBeNull::new_non_required(ByteString))
+		Self::ByteString(MayBeNull::new_optional(ByteString))
 	}
 
 	fn dom_string() -> Self {
@@ -157,7 +157,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn dom_string_opt() -> Self {
-		Self::DOMString(MayBeNull::new_non_required(DOMString))
+		Self::DOMString(MayBeNull::new_optional(DOMString))
 	}
 
 	fn usv_string() -> Self {
@@ -165,7 +165,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn usv_string_opt() -> Self {
-		Self::USVString(MayBeNull::new_non_required(USVString))
+		Self::USVString(MayBeNull::new_optional(USVString))
 	}
 
 	fn sequence(s: SequenceType<'a>) -> Self {
@@ -173,7 +173,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn sequence_opt(s: SequenceType<'a>) -> Self {
-		Self::Sequence(MayBeNull::new_non_required(s))
+		Self::Sequence(MayBeNull::new_optional(s))
 	}
 
 	fn object() -> Self {
@@ -181,7 +181,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn object_opt() -> Self {
-		Self::Object(MayBeNull::new_non_required(Object))
+		Self::Object(MayBeNull::new_optional(Object))
 	}
 
 	fn symbol() -> Self {
@@ -189,7 +189,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn symbol_opt() -> Self {
-		Self::Symbol(MayBeNull::new_non_required(Symbol))
+		Self::Symbol(MayBeNull::new_optional(Symbol))
 	}
 
 	fn error() -> Self {
@@ -197,7 +197,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn error_opt() -> Self {
-		Self::Error(MayBeNull::new_non_required(Error))
+		Self::Error(MayBeNull::new_optional(Error))
 	}
 
 	fn array_buffer() -> Self {
@@ -205,7 +205,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn array_buffer_opt() -> Self {
-		Self::ArrayBuffer(MayBeNull::new_non_required(ArrayBuffer))
+		Self::ArrayBuffer(MayBeNull::new_optional(ArrayBuffer))
 	}
 
 	fn data_view() -> Self {
@@ -213,7 +213,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn data_view_opt() -> Self {
-		Self::DataView(MayBeNull::new_non_required(DataView))
+		Self::DataView(MayBeNull::new_optional(DataView))
 	}
 
 	fn int8_array() -> Self {
@@ -221,7 +221,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn int8_array_opt() -> Self {
-		Self::Int8Array(MayBeNull::new_non_required(Int8Array))
+		Self::Int8Array(MayBeNull::new_optional(Int8Array))
 	}
 
 	fn int16_array() -> Self {
@@ -229,7 +229,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn int16_array_opt() -> Self {
-		Self::Int16Array(MayBeNull::new_non_required(Int16Array))
+		Self::Int16Array(MayBeNull::new_optional(Int16Array))
 	}
 
 	fn int32_array() -> Self {
@@ -237,7 +237,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn int32_array_opt() -> Self {
-		Self::Int32Array(MayBeNull::new_non_required(Int32Array))
+		Self::Int32Array(MayBeNull::new_optional(Int32Array))
 	}
 
 	fn uint8_array() -> Self {
@@ -245,7 +245,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn uint8_array_opt() -> Self {
-		Self::Uint8Array(MayBeNull::new_non_required(Uint8Array))
+		Self::Uint8Array(MayBeNull::new_optional(Uint8Array))
 	}
 
 	fn uint16_array() -> Self {
@@ -253,7 +253,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn uint16_array_opt() -> Self {
-		Self::Uint16Array(MayBeNull::new_non_required(Uint16Array))
+		Self::Uint16Array(MayBeNull::new_optional(Uint16Array))
 	}
 
 	fn uint32_array() -> Self {
@@ -261,7 +261,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn uint32_array_opt() -> Self {
-		Self::Uint32Array(MayBeNull::new_non_required(Uint32Array))
+		Self::Uint32Array(MayBeNull::new_optional(Uint32Array))
 	}
 
 	fn uint8_clamped_array() -> Self {
@@ -269,7 +269,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn uint8_clamped_array_opt() -> Self {
-		Self::Uint8ClampedArray(MayBeNull::new_non_required(Uint8ClampedArray))
+		Self::Uint8ClampedArray(MayBeNull::new_optional(Uint8ClampedArray))
 	}
 
 	fn float32_array() -> Self {
@@ -277,7 +277,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn float32_array_opt() -> Self {
-		Self::Float32Array(MayBeNull::new_non_required(Float32Array))
+		Self::Float32Array(MayBeNull::new_optional(Float32Array))
 	}
 
 	fn float64_array() -> Self {
@@ -285,7 +285,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn float64_array_opt() -> Self {
-		Self::Float64Array(MayBeNull::new_non_required(Float64Array))
+		Self::Float64Array(MayBeNull::new_optional(Float64Array))
 	}
 
 	fn array_buffer_view() -> Self {
@@ -293,7 +293,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn array_buffer_view_opt() -> Self {
-		Self::ArrayBuffer(MayBeNull::new_non_required(ArrayBuffer))
+		Self::ArrayBuffer(MayBeNull::new_optional(ArrayBuffer))
 	}
 
 	fn buffer_source() -> Self {
@@ -301,7 +301,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn buffer_source_opt() -> Self {
-		Self::BufferSource(MayBeNull::new_non_required(BufferSource))
+		Self::BufferSource(MayBeNull::new_optional(BufferSource))
 	}
 
 	fn frozen_array(f: FrozenArrayType<'a>) -> Self {
@@ -309,7 +309,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn frozen_array_opt(f: FrozenArrayType<'a>) -> Self {
-		Self::FrozenArrayType(MayBeNull::new_non_required(f))
+		Self::FrozenArrayType(MayBeNull::new_optional(f))
 	}
 
 	fn record(r: RecordType<'a>) -> Self {
@@ -317,7 +317,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn record_opt(r: RecordType<'a>) -> Self {
-		Self::RecordType(MayBeNull::new_non_required(r))
+		Self::RecordType(MayBeNull::new_optional(r))
 	}
 
 	fn identifier(i: Identifier<'a>) -> Self {
@@ -325,7 +325,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn identifier_opt(i: Identifier<'a>) -> Self {
-		Self::Identifier(MayBeNull::new_non_required(i))
+		Self::Identifier(MayBeNull::new_optional(i))
 	}
 }
 
