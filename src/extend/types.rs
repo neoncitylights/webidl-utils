@@ -132,11 +132,8 @@ impl ExtendIntegerType for ShortType {
 impl ExtendIntegerTypeNew for ShortType {
 	type IntegerType = Short;
 
-	fn new(unsigned: Option<Unsigned>, ty: Self::IntegerType) -> Self {
-		Self {
-			unsigned,
-			short: ty,
-		}
+	fn new(unsigned: Option<Unsigned>, short: Self::IntegerType) -> Self {
+		Self { unsigned, short }
 	}
 
 	fn new_signed() -> Self {
@@ -157,8 +154,8 @@ impl ExtendIntegerType for LongType {
 impl ExtendIntegerTypeNew for LongType {
 	type IntegerType = Long;
 
-	fn new(unsigned: Option<Unsigned>, ty: Self::IntegerType) -> Self {
-		Self { unsigned, long: ty }
+	fn new(unsigned: Option<Unsigned>, long: Self::IntegerType) -> Self {
+		Self { unsigned, long }
 	}
 
 	fn new_signed() -> Self {
@@ -178,11 +175,10 @@ impl ExtendIntegerType for LongLongType {
 
 impl ExtendIntegerTypeNew for LongLongType {
 	type IntegerType = (Long, Long);
-	fn new(unsigned: Option<Unsigned>, ty: Self::IntegerType) -> Self {
-		Self {
-			unsigned,
-			long_long: ty,
-		}
+
+	#[rustfmt::skip]
+	fn new(unsigned: Option<Unsigned>, long_long: Self::IntegerType) -> Self {
+		Self { unsigned, long_long }
 	}
 
 	fn new_signed() -> Self {
