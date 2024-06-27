@@ -10,5 +10,8 @@ keywords = [
 	"webidl"
 ]
 
+[badges]
+maintenance.status = "experimental"
+
 [dependencies]
 weedle2 = "5.0.0"
