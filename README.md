@@ -5,7 +5,7 @@
 [![Security audit](https://img.shields.io/github/actions/workflow/status/neoncitylights/webidl-utils/.github/workflows/main.yml?style=flat-square)](https://github.com/neoncitylights/webidl-utils/actions/workflows/security-audit.yml)
 [![Codecov](https://img.shields.io/codecov/c/github/neoncitylights/webidl-utils?style=flat-square&logo=codecov&logoColor=%23fff)](https://codecov.io/gh/neoncitylights/webidl-utils)
 
-A crate of utilities for working with the WebIDL AST, by extending weedle2
+A crate of utilities for working with the WebIDL AST, by extending `weedle2`. The crate's API is not currently stable yet.
 
 ## Install
 
