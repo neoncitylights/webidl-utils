@@ -1,4 +1,6 @@
 use weedle::argument::{SingleArgument, VariadicArgument};
+use weedle::attribute::ExtendedAttribute;
+use weedle::common::{Bracketed, Punctuated};
 use weedle::dictionary::DictionaryMember;
 use weedle::interface::*;
 use weedle::mixin::{AttributeMixinMember, OperationMixinMember};
@@ -6,24 +8,55 @@ use weedle::namespace::{AttributeNamespaceMember, OperationNamespaceMember};
 use weedle::types::{AttributedNonAnyType, AttributedType};
 use weedle::*;
 
-/// A WebIDL symbol that may have 0 or more extended attributes
-pub trait SymbolWithAttributes<'a> {
-	fn attributes(self) -> Option<weedle::attribute::ExtendedAttributeList<'a>>;
+/// An iterator over WebIDL attributes
+pub struct AttributesIterator<'a> {
+	pub attributes: weedle::attribute::ExtendedAttributeList<'a>,
 }
 
-macro_rules! impl_symbol_with_attributes {
-	($($sym:ident),+ $(,)?) => {
+impl<'a> AttributesIterator<'a> {
+	pub const fn new(attributes: weedle::attribute::ExtendedAttributeList<'a>) -> Self {
+		Self { attributes }
+	}
+}
+
+impl<'a> IntoIterator for AttributesIterator<'a> {
+	type Item = ExtendedAttribute<'a>;
+	type IntoIter = std::vec::IntoIter<Self::Item>;
+
+	fn into_iter(self) -> Self::IntoIter {
+		self.attributes.body.list.into_iter()
+	}
+}
+
+pub trait IntoAttributesIterator<'a> {
+	fn into_iter_attributes(self) -> AttributesIterator<'a>;
+}
+
+macro_rules! impl_into_attributes_iterator {
+	($($target:ident),+ $(,)?) => {
 		$(
-			impl<'a> SymbolWithAttributes<'a> for $sym<'a> {
-				fn attributes(self) -> Option<weedle::attribute::ExtendedAttributeList<'a>> {
-					self.attributes
+			impl<'a> IntoAttributesIterator<'a> for $target<'a> {
+				fn into_iter_attributes(self) -> AttributesIterator<'a> {
+					match self.attributes.as_ref() {
+						Some(a) =>	AttributesIterator::new(a.clone()),
+						None => AttributesIterator::new(
+							Bracketed {
+								open_bracket: weedle::term::OpenBracket,
+								body: Punctuated {
+									list: vec![],
+									separator: weedle::term::Comma,
+								},
+								close_bracket: weedle::term::CloseBracket,
+							}
+						)
+					}
 				}
 			}
 		)+
-	};
+	}
 }
 
-impl_symbol_with_attributes!(
+impl_into_attributes_iterator!(
 	CallbackDefinition,
 	CallbackInterfaceDefinition,
 	DictionaryDefinition,
@@ -58,3 +91,37 @@ impl_symbol_with_attributes!(
 	AttributedType,
 	AttributedNonAnyType,
 );
+
+#[cfg(test)]
+mod tests {
+	use crate::IntoAttributesIterator;
+	use weedle::attribute::{ExtendedAttribute, ExtendedAttributeIdent, IdentifierOrString};
+	use weedle::common::Identifier;
+	use weedle::term::Assign;
+	use weedle::{parse, Definition};
+
+	#[test]
+	fn test_attributes_iter() {
+		let text = "[Exposed=Window] typedef short Number;";
+		let parse_result = parse(text);
+		if let Ok(definitions) = parse_result {
+			let def1 = &definitions[0];
+			match def1 {
+				Definition::Typedef(t) => {
+					let mut iter = t.clone().into_iter_attributes().into_iter();
+					assert_eq!(
+						iter.next(),
+						Some(ExtendedAttribute::Ident(ExtendedAttributeIdent {
+							lhs_identifier: Identifier("Exposed"),
+							assign: Assign,
+							rhs: IdentifierOrString::Identifier(Identifier("Window")),
+						}))
+					);
+				}
+				_ => panic!("Not a typedef"),
+			}
+		} else {
+			panic!("weedle2: Could not parse {}", text);
+		}
+	}
+}
