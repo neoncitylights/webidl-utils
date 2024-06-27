@@ -28,6 +28,7 @@ impl<'a> IntoIterator for AttributesIterator<'a> {
 	}
 }
 
+/// An `IntoIterator` over WebIDL attributes
 pub trait IntoAttributesIterator<'a> {
 	fn into_iter_attributes(self) -> AttributesIterator<'a>;
 }
