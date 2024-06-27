@@ -30,7 +30,7 @@ impl<T> ExtendMayBeNull<T> for MayBeNull<T> {
 
 /// Extension methods for floating point types
 pub trait ExtendFloatingPointType {
-	fn unrestricted(self) -> Option<Unrestricted>;
+	fn unrestricted(&self) -> Option<Unrestricted>;
 }
 
 /// Extension methods for creating floating point types
@@ -42,7 +42,7 @@ pub trait ExtendFloatingPointTypeNew {
 }
 
 impl ExtendFloatingPointType for FloatingPointType {
-	fn unrestricted(self) -> Option<Unrestricted> {
+	fn unrestricted(&self) -> Option<Unrestricted> {
 		match self {
 			Self::Float(f) => f.unrestricted,
 			Self::Double(f) => f.unrestricted,
@@ -51,7 +51,7 @@ impl ExtendFloatingPointType for FloatingPointType {
 }
 
 impl ExtendFloatingPointType for DoubleType {
-	fn unrestricted(self) -> Option<Unrestricted> {
+	fn unrestricted(&self) -> Option<Unrestricted> {
 		self.unrestricted
 	}
 }
@@ -76,7 +76,7 @@ impl ExtendFloatingPointTypeNew for DoubleType {
 }
 
 impl ExtendFloatingPointType for FloatType {
-	fn unrestricted(self) -> Option<Unrestricted> {
+	fn unrestricted(&self) -> Option<Unrestricted> {
 		self.unrestricted
 	}
 }
@@ -102,7 +102,7 @@ impl ExtendFloatingPointTypeNew for FloatType {
 
 /// Extension methods for integer types
 pub trait ExtendIntegerType {
-	fn unsigned(self) -> Option<Unsigned>;
+	fn unsigned(&self) -> Option<Unsigned>;
 }
 
 /// Extension methods for creating integer types
@@ -114,7 +114,7 @@ pub trait ExtendIntegerTypeNew {
 }
 
 impl ExtendIntegerType for IntegerType {
-	fn unsigned(self) -> Option<Unsigned> {
+	fn unsigned(&self) -> Option<Unsigned> {
 		match self {
 			Self::Short(i) => i.unsigned,
 			Self::Long(i) => i.unsigned,
@@ -124,7 +124,7 @@ impl ExtendIntegerType for IntegerType {
 }
 
 impl ExtendIntegerType for ShortType {
-	fn unsigned(self) -> Option<Unsigned> {
+	fn unsigned(&self) -> Option<Unsigned> {
 		self.unsigned
 	}
 }
@@ -146,7 +146,7 @@ impl ExtendIntegerTypeNew for ShortType {
 }
 
 impl ExtendIntegerType for LongType {
-	fn unsigned(self) -> Option<Unsigned> {
+	fn unsigned(&self) -> Option<Unsigned> {
 		self.unsigned
 	}
 }
@@ -168,7 +168,7 @@ impl ExtendIntegerTypeNew for LongType {
 }
 
 impl ExtendIntegerType for LongLongType {
-	fn unsigned(self) -> Option<Unsigned> {
+	fn unsigned(&self) -> Option<Unsigned> {
 		self.unsigned
 	}
 }
