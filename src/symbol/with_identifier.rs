@@ -7,14 +7,14 @@ use weedle::*;
 
 /// A WebIDL symbol with an identifier
 pub trait SymbolWithIdentifier<'a> {
-	fn identifier(self) -> weedle::common::Identifier<'a>;
+	fn identifier(&self) -> weedle::common::Identifier<'a>;
 }
 
 macro_rules! impl_symbol_with_identifier {
 	($($sym:ident),+ $(,)?) => {
 		$(
 			impl<'a> SymbolWithIdentifier<'a> for $sym<'a> {
-				fn identifier(self) -> weedle::common::Identifier<'a> {
+				fn identifier(&self) -> weedle::common::Identifier<'a> {
 					self.identifier
 				}
 			}
