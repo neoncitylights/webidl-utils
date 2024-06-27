@@ -261,7 +261,7 @@ impl<'a> ExtendRecordType<'a> for RecordType<'a> {
 	}
 }
 
-/// Extension methods for 'Type'
+/// Extension methods for `Type`
 pub trait ExtendType {
 	fn single_any() -> Self;
 }
@@ -272,7 +272,7 @@ impl<'a> ExtendType for Type<'a> {
 	}
 }
 
-/// Extension methods for 'SingleType'
+/// Extension methods for `SingleType`
 pub trait ExtendSingleType {
 	fn any() -> Self;
 }
