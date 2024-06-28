@@ -408,12 +408,13 @@ mod extend_non_any {
 		assert!(NonAnyType::array_buffer_view_opt().is_optional());
 		assert!(NonAnyType::buffer_source_opt().is_optional());
 		assert!(NonAnyType::sequence_opt(SequenceType::new(Type::single_any())).is_optional());
-		assert!(NonAnyType::frozen_array_opt(FrozenArrayType::new(Type::single_any())).is_optional());
+		assert!(
+			NonAnyType::frozen_array_opt(FrozenArrayType::new(Type::single_any())).is_optional()
+		);
 		assert!(
 			NonAnyType::record_opt(RecordType::new(RecordKeyType::byte(), Type::single_any()))
 				.is_optional()
 		);
 		assert!(NonAnyType::identifier_opt("FooBar").is_optional());
 	}
-
 }
