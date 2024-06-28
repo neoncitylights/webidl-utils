@@ -294,11 +294,11 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn array_buffer_view() -> Self {
-		Self::ArrayBuffer(MayBeNull::new_required(ArrayBuffer))
+		Self::ArrayBufferView(MayBeNull::new_required(ArrayBufferView))
 	}
 
 	fn array_buffer_view_opt() -> Self {
-		Self::ArrayBuffer(MayBeNull::new_optional(ArrayBuffer))
+		Self::ArrayBufferView(MayBeNull::new_optional(ArrayBufferView))
 	}
 
 	fn buffer_source() -> Self {
