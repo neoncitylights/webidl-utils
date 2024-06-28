@@ -9,6 +9,7 @@ edition = "2021"
 keywords = [
 	"webidl"
 ]
+include = ["src"]
 
 [badges]
 maintenance.status = "experimental"
