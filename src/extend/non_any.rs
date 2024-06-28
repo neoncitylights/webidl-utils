@@ -378,12 +378,13 @@ mod extend_non_any {
 		assert!(NonAnyType::float64_array().is_required());
 		assert!(NonAnyType::array_buffer_view().is_required());
 		assert!(NonAnyType::buffer_source().is_required());
-		assert!(NonAnyType::sequence(SequenceType::new(Type::single_any())).is_required());
-		assert!(NonAnyType::frozen_array(FrozenArrayType::new(Type::single_any())).is_required());
-		assert!(
-			NonAnyType::record(RecordType::new(RecordKeyType::byte(), Type::single_any()))
-				.is_required()
-		);
+
+		let seq = SequenceType::new(Type::single_any());
+		let frozen = FrozenArrayType::new(Type::single_any());
+		let record = RecordType::new(RecordKeyType::byte(), Type::single_any());
+		assert!(NonAnyType::sequence(seq).is_required());
+		assert!(NonAnyType::frozen_array(frozen).is_required());
+		assert!(NonAnyType::record(record).is_required());
 		assert!(NonAnyType::identifier("FooBar").is_required());
 	}
 
@@ -416,14 +417,13 @@ mod extend_non_any {
 		assert!(NonAnyType::float64_array_opt().is_optional());
 		assert!(NonAnyType::array_buffer_view_opt().is_optional());
 		assert!(NonAnyType::buffer_source_opt().is_optional());
-		assert!(NonAnyType::sequence_opt(SequenceType::new(Type::single_any())).is_optional());
-		assert!(
-			NonAnyType::frozen_array_opt(FrozenArrayType::new(Type::single_any())).is_optional()
-		);
-		assert!(
-			NonAnyType::record_opt(RecordType::new(RecordKeyType::byte(), Type::single_any()))
-				.is_optional()
-		);
+
+		let seq = SequenceType::new(Type::single_any());
+		let frozen = FrozenArrayType::new(Type::single_any());
+		let record = RecordType::new(RecordKeyType::byte(), Type::single_any());
+		assert!(NonAnyType::sequence_opt(seq).is_optional());
+		assert!(NonAnyType::frozen_array_opt(frozen).is_optional());
+		assert!(NonAnyType::record_opt(record).is_optional());
 		assert!(NonAnyType::identifier_opt("FooBar").is_optional());
 	}
 }
