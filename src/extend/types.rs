@@ -8,6 +8,7 @@ pub trait ExtendMayBeNull<T> {
 	fn new_optional(type_: T) -> Self;
 	fn new_required(type_: T) -> Self;
 	fn is_optional(&self) -> bool;
+	fn is_required(&self) -> bool;
 }
 
 impl<T> ExtendMayBeNull<T> for MayBeNull<T> {
@@ -25,6 +26,10 @@ impl<T> ExtendMayBeNull<T> for MayBeNull<T> {
 
 	fn is_optional(&self) -> bool {
 		self.q_mark.is_some()
+	}
+
+	fn is_required(&self) -> bool {
+		self.q_mark.is_none()
 	}
 }
 
@@ -312,7 +317,7 @@ impl<'a> ExtendSingleType for SingleType<'a> {
 #[cfg(test)]
 mod extend_maybenull {
 	use crate::ExtendMayBeNull;
-	use weedle::term::{Byte, QMark};
+	use weedle::term::{Boolean, Byte, QMark};
 	use weedle::types::MayBeNull;
 
 	#[test]
@@ -320,6 +325,13 @@ mod extend_maybenull {
 		let maybe = MayBeNull::new(Byte, Some(QMark));
 		assert_eq!(maybe.type_, Byte);
 		assert_eq!(maybe.q_mark, Some(QMark));
+	}
+
+	#[test]
+	fn test_is_required() {
+		let maybe = MayBeNull::new_required(Boolean);
+		assert!(maybe.is_required());
+		assert!(maybe.q_mark.is_none());
 	}
 }
 
