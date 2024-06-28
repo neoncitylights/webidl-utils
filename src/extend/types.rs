@@ -445,3 +445,40 @@ mod extend_record {
 		assert_eq!(*(r.generics.body.2), Type::single_any());
 	}
 }
+
+#[cfg(test)]
+mod extend_record_key {
+	use crate::{ExtendRecordKeyType, ExtendNonAnyType};
+	use weedle::types::{MayBeNull, NonAnyType, RecordKeyType};
+	use weedle::term::{Boolean, ByteString, DOMString, USVString};
+
+	#[test]
+	fn test_variant_byte() {
+		assert_eq!(RecordKeyType::byte(), RecordKeyType::Byte(ByteString));
+	}
+
+	#[test]
+	fn test_variant_dom() {
+		assert_eq!(RecordKeyType::dom(), RecordKeyType::DOM(DOMString));
+	}
+
+	#[test]
+	fn test_variant_usv() {
+		assert_eq!(RecordKeyType::usv(), RecordKeyType::USV(USVString));
+	}
+
+	#[test]
+	fn test_variant_nat() {
+		assert_eq!(
+			RecordKeyType::non_any(NonAnyType::boolean()),
+			RecordKeyType::NonAny(
+				NonAnyType::Boolean(
+					MayBeNull {
+						type_: Boolean,
+						q_mark: None,
+					}
+				)
+			)
+		);
+	}
+}
