@@ -337,21 +337,25 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 #[cfg(test)]
 mod extend_non_any {
 	use crate::{
-		ExtendFrozenArrayType, ExtendNonAnyType, ExtendPromiseType, ExtendRecordKeyType,
-		ExtendRecordType, ExtendSequenceType, ExtendType,
+		ExtendFloatingPointTypeNew, ExtendFrozenArrayType, ExtendIntegerTypeNew, ExtendNonAnyType,
+		ExtendPromiseType, ExtendRecordKeyType, ExtendRecordType, ExtendSequenceType, ExtendType,
 	};
 	use weedle::types::{
-		FrozenArrayType, NonAnyType, RecordKeyType, RecordType, ReturnType, SequenceType,
-		SingleType, Type,
+		FloatType, FloatingPointType, FrozenArrayType, IntegerType, LongType, NonAnyType,
+		PromiseType, RecordKeyType, RecordType, ReturnType, SequenceType, SingleType, Type,
 	};
 
 	#[test]
 	fn test_required() {
-		let promise = weedle::types::PromiseType::new(ReturnType::Type(Type::Single(
-			SingleType::NonAny(NonAnyType::boolean()),
-		)));
+		let promise = PromiseType::new(ReturnType::Type(Type::Single(SingleType::NonAny(
+			NonAnyType::boolean(),
+		))));
+		let integer = IntegerType::Long(LongType::new_unsigned());
+		let float = FloatingPointType::Float(FloatType::new_unrestricted());
 
-		assert!(NonAnyType::Promise(promise).is_required());
+		assert!(NonAnyType::promise(promise).is_required());
+		assert!(NonAnyType::integer(integer).is_required());
+		assert!(NonAnyType::floating_point(float).is_required());
 		assert!(NonAnyType::boolean().is_required());
 		assert!(NonAnyType::byte().is_required());
 		assert!(NonAnyType::octet().is_required());
@@ -385,6 +389,11 @@ mod extend_non_any {
 
 	#[test]
 	fn test_optional() {
+		let integer = IntegerType::Long(LongType::new_unsigned());
+		let float = FloatingPointType::Float(FloatType::new_unrestricted());
+
+		assert!(NonAnyType::integer_opt(integer).is_optional());
+		assert!(NonAnyType::floating_point_opt(float).is_optional());
 		assert!(NonAnyType::boolean_opt().is_optional());
 		assert!(NonAnyType::byte_opt().is_optional());
 		assert!(NonAnyType::octet_opt().is_optional());
