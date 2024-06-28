@@ -332,10 +332,10 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 #[cfg(test)]
 mod extend_non_any {
 	use crate::{
-		ExtendFrozenArrayType, ExtendNonAnyType, ExtendRecordType, ExtendSequenceType, ExtendType,
+		ExtendFrozenArrayType, ExtendNonAnyType, ExtendRecordKeyType, ExtendRecordType,
+		ExtendSequenceType, ExtendType,
 	};
 	use weedle::common::Identifier;
-	use weedle::term::ByteString;
 	use weedle::types::{
 		FrozenArrayType, NonAnyType, RecordKeyType, RecordType, SequenceType, Type,
 	};
@@ -369,11 +369,10 @@ mod extend_non_any {
 
 		assert!(!NonAnyType::frozen_array(FrozenArrayType::new(Type::single_any())).is_optional());
 
-		assert!(!NonAnyType::record(RecordType::new(
-			RecordKeyType::Byte(ByteString),
-			Type::single_any()
-		))
-		.is_optional());
+		assert!(
+			!NonAnyType::record(RecordType::new(RecordKeyType::byte(), Type::single_any()))
+				.is_optional()
+		);
 
 		assert!(!NonAnyType::identifier(Identifier("FooBar")).is_optional());
 	}
