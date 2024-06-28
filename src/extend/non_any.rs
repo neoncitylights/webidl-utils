@@ -61,8 +61,8 @@ pub trait ExtendNonAnyType<'a> {
 	fn frozen_array_opt(f: FrozenArrayType<'a>) -> Self;
 	fn record(r: RecordType<'a>) -> Self;
 	fn record_opt(r: RecordType<'a>) -> Self;
-	fn identifier(i: Identifier<'a>) -> Self;
-	fn identifier_opt(i: Identifier<'a>) -> Self;
+	fn identifier(i: &'a str) -> Self;
+	fn identifier_opt(i: &'a str) -> Self;
 }
 
 impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
@@ -320,12 +320,12 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 		Self::RecordType(MayBeNull::new_optional(r))
 	}
 
-	fn identifier(i: Identifier<'a>) -> Self {
-		Self::Identifier(MayBeNull::new_required(i))
+	fn identifier(i: &'a str) -> Self {
+		Self::Identifier(MayBeNull::new_required(Identifier(i)))
 	}
 
-	fn identifier_opt(i: Identifier<'a>) -> Self {
-		Self::Identifier(MayBeNull::new_optional(i))
+	fn identifier_opt(i: &'a str) -> Self {
+		Self::Identifier(MayBeNull::new_optional(Identifier(i)))
 	}
 }
 
@@ -335,7 +335,6 @@ mod extend_non_any {
 		ExtendFrozenArrayType, ExtendNonAnyType, ExtendRecordKeyType, ExtendRecordType,
 		ExtendSequenceType, ExtendType,
 	};
-	use weedle::common::Identifier;
 	use weedle::types::{
 		FrozenArrayType, NonAnyType, RecordKeyType, RecordType, SequenceType, Type,
 	};
@@ -374,6 +373,11 @@ mod extend_non_any {
 				.is_optional()
 		);
 
-		assert!(!NonAnyType::identifier(Identifier("FooBar")).is_optional());
+		assert!(!NonAnyType::identifier("FooBar").is_optional());
+	}
+
+	#[test]
+	fn test_optional() {
+		assert!(NonAnyType::identifier_opt("FooBar").is_optional());
 	}
 }
