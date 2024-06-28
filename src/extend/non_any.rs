@@ -385,6 +385,35 @@ mod extend_non_any {
 
 	#[test]
 	fn test_optional() {
+		assert!(NonAnyType::boolean_opt().is_optional());
+		assert!(NonAnyType::byte_opt().is_optional());
+		assert!(NonAnyType::octet_opt().is_optional());
+		assert!(NonAnyType::byte_string_opt().is_optional());
+		assert!(NonAnyType::dom_string_opt().is_optional());
+		assert!(NonAnyType::usv_string_opt().is_optional());
+		assert!(NonAnyType::object_opt().is_optional());
+		assert!(NonAnyType::symbol_opt().is_optional());
+		assert!(NonAnyType::error_opt().is_optional());
+		assert!(NonAnyType::array_buffer_opt().is_optional());
+		assert!(NonAnyType::data_view_opt().is_optional());
+		assert!(NonAnyType::int8_array_opt().is_optional());
+		assert!(NonAnyType::int16_array_opt().is_optional());
+		assert!(NonAnyType::int32_array_opt().is_optional());
+		assert!(NonAnyType::uint8_array_opt().is_optional());
+		assert!(NonAnyType::uint16_array_opt().is_optional());
+		assert!(NonAnyType::uint32_array_opt().is_optional());
+		assert!(NonAnyType::uint8_clamped_array_opt().is_optional());
+		assert!(NonAnyType::float32_array_opt().is_optional());
+		assert!(NonAnyType::float64_array_opt().is_optional());
+		assert!(NonAnyType::array_buffer_view_opt().is_optional());
+		assert!(NonAnyType::buffer_source_opt().is_optional());
+		assert!(NonAnyType::sequence_opt(SequenceType::new(Type::single_any())).is_optional());
+		assert!(NonAnyType::frozen_array_opt(FrozenArrayType::new(Type::single_any())).is_optional());
+		assert!(
+			NonAnyType::record_opt(RecordType::new(RecordKeyType::byte(), Type::single_any()))
+				.is_optional()
+		);
 		assert!(NonAnyType::identifier_opt("FooBar").is_optional());
 	}
+
 }
