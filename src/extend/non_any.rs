@@ -375,4 +375,9 @@ mod extend_non_any {
 
 		assert!(!NonAnyType::identifier("FooBar").is_optional());
 	}
+
+	#[test]
+	fn test_optional() {
+		assert!(NonAnyType::identifier_opt("FooBar").is_optional());
+	}
 }
