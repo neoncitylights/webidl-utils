@@ -261,6 +261,32 @@ impl<'a> ExtendRecordType<'a> for RecordType<'a> {
 	}
 }
 
+/// Extension methods for `RecordKeyType`
+pub trait ExtendRecordKeyType<'a> {
+	fn byte() -> Self;
+	fn dom() -> Self;
+	fn usv() -> Self;
+	fn non_any(nat: NonAnyType<'a>) -> Self;
+}
+
+impl<'a> ExtendRecordKeyType<'a> for RecordKeyType<'a> {
+	fn byte() -> Self {
+		Self::Byte(ByteString)
+	}
+
+	fn dom() -> Self {
+		Self::DOM(DOMString)
+	}
+
+	fn usv() -> Self {
+		Self::USV(USVString)
+	}
+
+	fn non_any(nat: NonAnyType<'a>) -> Self {
+		Self::NonAny(nat)
+	}
+}
+
 /// Extension methods for `Type`
 pub trait ExtendType {
 	fn single_any() -> Self;
@@ -408,15 +434,47 @@ mod extend_frozen_array {
 
 #[cfg(test)]
 mod extend_record {
-	use crate::{ExtendRecordType, ExtendType};
-	use weedle::term::ByteString;
+	use crate::{ExtendRecordKeyType, ExtendRecordType, ExtendType};
 	use weedle::types::{RecordKeyType, RecordType, Type};
 
 	#[test]
 	fn test_new() {
-		let r = RecordType::new(RecordKeyType::Byte(ByteString), Type::single_any());
+		let r = RecordType::new(RecordKeyType::byte(), Type::single_any());
 
-		assert_eq!(*(r.generics.body.0), RecordKeyType::Byte(ByteString));
+		assert_eq!(*(r.generics.body.0), RecordKeyType::byte());
 		assert_eq!(*(r.generics.body.2), Type::single_any());
+	}
+}
+
+#[cfg(test)]
+mod extend_record_key {
+	use crate::{ExtendNonAnyType, ExtendRecordKeyType};
+	use weedle::term::{Boolean, ByteString, DOMString, USVString};
+	use weedle::types::{MayBeNull, NonAnyType, RecordKeyType};
+
+	#[test]
+	fn test_variant_byte() {
+		assert_eq!(RecordKeyType::byte(), RecordKeyType::Byte(ByteString));
+	}
+
+	#[test]
+	fn test_variant_dom() {
+		assert_eq!(RecordKeyType::dom(), RecordKeyType::DOM(DOMString));
+	}
+
+	#[test]
+	fn test_variant_usv() {
+		assert_eq!(RecordKeyType::usv(), RecordKeyType::USV(USVString));
+	}
+
+	#[test]
+	fn test_variant_nat() {
+		assert_eq!(
+			RecordKeyType::non_any(NonAnyType::boolean()),
+			RecordKeyType::NonAny(NonAnyType::Boolean(MayBeNull {
+				type_: Boolean,
+				q_mark: None,
+			}))
+		);
 	}
 }
