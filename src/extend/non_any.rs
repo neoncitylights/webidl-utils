@@ -6,6 +6,7 @@ use weedle::types::*;
 /// Extension methods for `NonAnyType`
 pub trait ExtendNonAnyType<'a> {
 	fn is_optional(&self) -> bool;
+	fn is_required(&self) -> bool;
 	fn promise(p: PromiseType<'a>) -> Self;
 	fn integer(i: IntegerType) -> Self;
 	fn integer_opt(i: IntegerType) -> Self;
@@ -98,6 +99,10 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 			Self::RecordType(t) => t.is_optional(),
 			Self::Identifier(t) => t.is_optional(),
 		}
+	}
+
+	fn is_required(&self) -> bool {
+		!self.is_optional()
 	}
 
 	fn promise(p: PromiseType<'a>) -> Self {
@@ -332,48 +337,50 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 #[cfg(test)]
 mod extend_non_any {
 	use crate::{
-		ExtendFrozenArrayType, ExtendNonAnyType, ExtendRecordKeyType, ExtendRecordType,
-		ExtendSequenceType, ExtendType,
+		ExtendFrozenArrayType, ExtendNonAnyType, ExtendPromiseType, ExtendRecordKeyType,
+		ExtendRecordType, ExtendSequenceType, ExtendType,
 	};
 	use weedle::types::{
-		FrozenArrayType, NonAnyType, RecordKeyType, RecordType, SequenceType, Type,
+		FrozenArrayType, NonAnyType, RecordKeyType, RecordType, ReturnType, SequenceType,
+		SingleType, Type,
 	};
 
 	#[test]
-	fn test_non_opt() {
-		assert!(!NonAnyType::boolean().is_optional());
-		assert!(!NonAnyType::byte().is_optional());
-		assert!(!NonAnyType::octet().is_optional());
-		assert!(!NonAnyType::byte_string().is_optional());
-		assert!(!NonAnyType::dom_string().is_optional());
-		assert!(!NonAnyType::usv_string().is_optional());
-		assert!(!NonAnyType::object().is_optional());
-		assert!(!NonAnyType::symbol().is_optional());
-		assert!(!NonAnyType::error().is_optional());
-		assert!(!NonAnyType::array_buffer().is_optional());
-		assert!(!NonAnyType::data_view().is_optional());
-		assert!(!NonAnyType::int8_array().is_optional());
-		assert!(!NonAnyType::int16_array().is_optional());
-		assert!(!NonAnyType::int32_array().is_optional());
-		assert!(!NonAnyType::uint8_array().is_optional());
-		assert!(!NonAnyType::uint16_array().is_optional());
-		assert!(!NonAnyType::uint32_array().is_optional());
-		assert!(!NonAnyType::uint8_clamped_array().is_optional());
-		assert!(!NonAnyType::float32_array().is_optional());
-		assert!(!NonAnyType::float64_array().is_optional());
-		assert!(!NonAnyType::array_buffer_view().is_optional());
-		assert!(!NonAnyType::buffer_source().is_optional());
+	fn test_required() {
+		let promise = weedle::types::PromiseType::new(ReturnType::Type(Type::Single(
+			SingleType::NonAny(NonAnyType::boolean()),
+		)));
 
-		assert!(!NonAnyType::sequence(SequenceType::new(Type::single_any())).is_optional());
-
-		assert!(!NonAnyType::frozen_array(FrozenArrayType::new(Type::single_any())).is_optional());
-
+		assert!(NonAnyType::Promise(promise).is_required());
+		assert!(NonAnyType::boolean().is_required());
+		assert!(NonAnyType::byte().is_required());
+		assert!(NonAnyType::octet().is_required());
+		assert!(NonAnyType::byte_string().is_required());
+		assert!(NonAnyType::dom_string().is_required());
+		assert!(NonAnyType::usv_string().is_required());
+		assert!(NonAnyType::object().is_required());
+		assert!(NonAnyType::symbol().is_required());
+		assert!(NonAnyType::error().is_required());
+		assert!(NonAnyType::array_buffer().is_required());
+		assert!(NonAnyType::data_view().is_required());
+		assert!(NonAnyType::int8_array().is_required());
+		assert!(NonAnyType::int16_array().is_required());
+		assert!(NonAnyType::int32_array().is_required());
+		assert!(NonAnyType::uint8_array().is_required());
+		assert!(NonAnyType::uint16_array().is_required());
+		assert!(NonAnyType::uint32_array().is_required());
+		assert!(NonAnyType::uint8_clamped_array().is_required());
+		assert!(NonAnyType::float32_array().is_required());
+		assert!(NonAnyType::float64_array().is_required());
+		assert!(NonAnyType::array_buffer_view().is_required());
+		assert!(NonAnyType::buffer_source().is_required());
+		assert!(NonAnyType::sequence(SequenceType::new(Type::single_any())).is_required());
+		assert!(NonAnyType::frozen_array(FrozenArrayType::new(Type::single_any())).is_required());
 		assert!(
-			!NonAnyType::record(RecordType::new(RecordKeyType::byte(), Type::single_any()))
-				.is_optional()
+			NonAnyType::record(RecordType::new(RecordKeyType::byte(), Type::single_any()))
+				.is_required()
 		);
-
-		assert!(!NonAnyType::identifier("FooBar").is_optional());
+		assert!(NonAnyType::identifier("FooBar").is_required());
 	}
 
 	#[test]
