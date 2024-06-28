@@ -448,9 +448,9 @@ mod extend_record {
 
 #[cfg(test)]
 mod extend_record_key {
-	use crate::{ExtendRecordKeyType, ExtendNonAnyType};
-	use weedle::types::{MayBeNull, NonAnyType, RecordKeyType};
+	use crate::{ExtendNonAnyType, ExtendRecordKeyType};
 	use weedle::term::{Boolean, ByteString, DOMString, USVString};
+	use weedle::types::{MayBeNull, NonAnyType, RecordKeyType};
 
 	#[test]
 	fn test_variant_byte() {
@@ -471,14 +471,10 @@ mod extend_record_key {
 	fn test_variant_nat() {
 		assert_eq!(
 			RecordKeyType::non_any(NonAnyType::boolean()),
-			RecordKeyType::NonAny(
-				NonAnyType::Boolean(
-					MayBeNull {
-						type_: Boolean,
-						q_mark: None,
-					}
-				)
-			)
+			RecordKeyType::NonAny(NonAnyType::Boolean(MayBeNull {
+				type_: Boolean,
+				q_mark: None,
+			}))
 		);
 	}
 }
