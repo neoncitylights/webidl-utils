@@ -294,11 +294,11 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 	}
 
 	fn array_buffer_view() -> Self {
-		Self::ArrayBuffer(MayBeNull::new_required(ArrayBuffer))
+		Self::ArrayBufferView(MayBeNull::new_required(ArrayBufferView))
 	}
 
 	fn array_buffer_view_opt() -> Self {
-		Self::ArrayBuffer(MayBeNull::new_optional(ArrayBuffer))
+		Self::ArrayBufferView(MayBeNull::new_optional(ArrayBufferView))
 	}
 
 	fn buffer_source() -> Self {
@@ -337,21 +337,25 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 #[cfg(test)]
 mod extend_non_any {
 	use crate::{
-		ExtendFrozenArrayType, ExtendNonAnyType, ExtendPromiseType, ExtendRecordKeyType,
-		ExtendRecordType, ExtendSequenceType, ExtendType,
+		ExtendFloatingPointTypeNew, ExtendFrozenArrayType, ExtendIntegerTypeNew, ExtendNonAnyType,
+		ExtendPromiseType, ExtendRecordKeyType, ExtendRecordType, ExtendSequenceType, ExtendType,
 	};
 	use weedle::types::{
-		FrozenArrayType, NonAnyType, RecordKeyType, RecordType, ReturnType, SequenceType,
-		SingleType, Type,
+		FloatType, FloatingPointType, FrozenArrayType, IntegerType, LongType, NonAnyType,
+		PromiseType, RecordKeyType, RecordType, ReturnType, SequenceType, SingleType, Type,
 	};
 
 	#[test]
 	fn test_required() {
-		let promise = weedle::types::PromiseType::new(ReturnType::Type(Type::Single(
-			SingleType::NonAny(NonAnyType::boolean()),
-		)));
+		let promise = PromiseType::new(ReturnType::Type(Type::Single(SingleType::NonAny(
+			NonAnyType::boolean(),
+		))));
+		let integer = IntegerType::Long(LongType::new_unsigned());
+		let float = FloatingPointType::Float(FloatType::new_unrestricted());
 
-		assert!(NonAnyType::Promise(promise).is_required());
+		assert!(NonAnyType::promise(promise).is_required());
+		assert!(NonAnyType::integer(integer).is_required());
+		assert!(NonAnyType::floating_point(float).is_required());
 		assert!(NonAnyType::boolean().is_required());
 		assert!(NonAnyType::byte().is_required());
 		assert!(NonAnyType::octet().is_required());
@@ -374,17 +378,52 @@ mod extend_non_any {
 		assert!(NonAnyType::float64_array().is_required());
 		assert!(NonAnyType::array_buffer_view().is_required());
 		assert!(NonAnyType::buffer_source().is_required());
-		assert!(NonAnyType::sequence(SequenceType::new(Type::single_any())).is_required());
-		assert!(NonAnyType::frozen_array(FrozenArrayType::new(Type::single_any())).is_required());
-		assert!(
-			NonAnyType::record(RecordType::new(RecordKeyType::byte(), Type::single_any()))
-				.is_required()
-		);
+
+		let seq = SequenceType::new(Type::single_any());
+		let frozen = FrozenArrayType::new(Type::single_any());
+		let record = RecordType::new(RecordKeyType::byte(), Type::single_any());
+		assert!(NonAnyType::sequence(seq).is_required());
+		assert!(NonAnyType::frozen_array(frozen).is_required());
+		assert!(NonAnyType::record(record).is_required());
 		assert!(NonAnyType::identifier("FooBar").is_required());
 	}
 
 	#[test]
 	fn test_optional() {
+		let integer = IntegerType::Long(LongType::new_unsigned());
+		let float = FloatingPointType::Float(FloatType::new_unrestricted());
+
+		assert!(NonAnyType::integer_opt(integer).is_optional());
+		assert!(NonAnyType::floating_point_opt(float).is_optional());
+		assert!(NonAnyType::boolean_opt().is_optional());
+		assert!(NonAnyType::byte_opt().is_optional());
+		assert!(NonAnyType::octet_opt().is_optional());
+		assert!(NonAnyType::byte_string_opt().is_optional());
+		assert!(NonAnyType::dom_string_opt().is_optional());
+		assert!(NonAnyType::usv_string_opt().is_optional());
+		assert!(NonAnyType::object_opt().is_optional());
+		assert!(NonAnyType::symbol_opt().is_optional());
+		assert!(NonAnyType::error_opt().is_optional());
+		assert!(NonAnyType::array_buffer_opt().is_optional());
+		assert!(NonAnyType::data_view_opt().is_optional());
+		assert!(NonAnyType::int8_array_opt().is_optional());
+		assert!(NonAnyType::int16_array_opt().is_optional());
+		assert!(NonAnyType::int32_array_opt().is_optional());
+		assert!(NonAnyType::uint8_array_opt().is_optional());
+		assert!(NonAnyType::uint16_array_opt().is_optional());
+		assert!(NonAnyType::uint32_array_opt().is_optional());
+		assert!(NonAnyType::uint8_clamped_array_opt().is_optional());
+		assert!(NonAnyType::float32_array_opt().is_optional());
+		assert!(NonAnyType::float64_array_opt().is_optional());
+		assert!(NonAnyType::array_buffer_view_opt().is_optional());
+		assert!(NonAnyType::buffer_source_opt().is_optional());
+
+		let seq = SequenceType::new(Type::single_any());
+		let frozen = FrozenArrayType::new(Type::single_any());
+		let record = RecordType::new(RecordKeyType::byte(), Type::single_any());
+		assert!(NonAnyType::sequence_opt(seq).is_optional());
+		assert!(NonAnyType::frozen_array_opt(frozen).is_optional());
+		assert!(NonAnyType::record_opt(record).is_optional());
 		assert!(NonAnyType::identifier_opt("FooBar").is_optional());
 	}
 }
