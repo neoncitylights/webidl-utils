@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.1 (Unreleased / YYYY-MM-DD)
+## Unreleased (YYYY-MM-DD)
 
 ### Bugfixes
 - `ExtendNonAnyType` trait:  Fixed `array_buffer_view()` and `array_buffer_view_opt()` to properly return `NonAnyType::ArrayBufferView`. Previously, they returned `NonAnyType::ArrayBuffer`. ([#15](https://github.com/neoncitylights/webidl-utils/pull/15))
@@ -11,11 +11,11 @@
 ### Features
 - Add `ExtendNonAnyType::is_required()` ([#14](https://github.com/neoncitylights/webidl-utils/pull/14))
 - Add `ExtendMayBeNull::is_required()` ([#13](https://github.com/neoncitylights/webidl-utils/pull/13))
-- Add and implement `ExtendRecordKeyType` trait for `weedle::types::RecordKeyType`
+- Add and implement `ExtendRecordKeyType` trait for `weedle::types::RecordKeyType` ([#11](https://github.com/neoncitylights/webidl-utils/pull/11))
 
 ### Internal changes
 - Expand code coverage for `ExtendNonAnyType` ([#15](https://github.com/neoncitylights/webidl-utils/pull/15))
-- Fix badges in README.md
+- Fix badges in README.md ([#17](https://github.com/neoncitylights/webidl-utils/pull/17))
 
 ## 0.1.0 (2024-06-27)
 
