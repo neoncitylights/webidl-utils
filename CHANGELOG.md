@@ -9,7 +9,7 @@
 - `ExtendNonAnyType` trait: the function signatures of `identifier()` and `identifier_opt()` are simplified. They now take a string literal. Previously, they both took an `Identifier` type (a newtype that stores a string literal) ([#12](https://github.com/neoncitylights/webidl-utils/pull/12))
 
 ### Features
-- Add traits for extending types from `weedle::common` module: `ExtendBraced`, `ExtendBracketed`, `ExtendDocstring`, `ExtendGenerics`, `ExtendPunctuated`, `ExtendPunctuatedNonEmpty`
+- Add traits for extending types from `weedle::common` module: `ExtendBraced`, `ExtendBracketed`, `ExtendDocstring`, `ExtendGenerics`, `ExtendPunctuated`, `ExtendPunctuatedNonEmpty` ([#16](https://github.com/neoncitylights/webidl-utils/pull/16))
 - Add `ExtendNonAnyType::is_required()` ([#14](https://github.com/neoncitylights/webidl-utils/pull/14))
 - Add `ExtendMayBeNull::is_required()` ([#13](https://github.com/neoncitylights/webidl-utils/pull/13))
 - Add and implement `ExtendRecordKeyType` trait for `weedle::types::RecordKeyType` ([#11](https://github.com/neoncitylights/webidl-utils/pull/11))
