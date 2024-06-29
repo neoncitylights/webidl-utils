@@ -3,6 +3,7 @@ name = "webidl-utils"
 version = "0.1.0"
 authors = ["Samantha Nguyen <contact@samanthanguyen.me>"]
 description = "A crate of utilities for working with the WebIDL AST, by extending weedle2"
+repository = "https://github.com/neoncitylights/webidl-utils"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
 edition = "2021"
