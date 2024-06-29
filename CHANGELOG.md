@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased (YYYY-MM-DD)
+## 0.2.0 (2024-06-29)
 
 ### Bugfixes
 - `ExtendNonAnyType` trait:  Fixed `array_buffer_view()` and `array_buffer_view_opt()` to properly return `NonAnyType::ArrayBufferView`. Previously, they returned `NonAnyType::ArrayBuffer`. ([#15](https://github.com/neoncitylights/webidl-utils/pull/15))
