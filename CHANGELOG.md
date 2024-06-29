@@ -13,8 +13,9 @@
 - Add `ExtendMayBeNull::is_required()` ([#13](https://github.com/neoncitylights/webidl-utils/pull/13))
 - Add and implement `ExtendRecordKeyType` trait for `weedle::types::RecordKeyType`
 
-## Internal changes
+### Internal changes
 - Expand code coverage for `ExtendNonAnyType` ([#15](https://github.com/neoncitylights/webidl-utils/pull/15))
+- Fix badges in README.md
 
 ## 0.1.0 (2024-06-27)
 
