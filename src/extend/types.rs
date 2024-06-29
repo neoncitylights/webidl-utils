@@ -1,3 +1,4 @@
+use crate::ExtendGenerics;
 use weedle::common::Generics;
 use weedle::term::*;
 use weedle::types::*;
@@ -195,21 +196,6 @@ impl ExtendIntegerTypeNew for LongLongType {
 	}
 }
 
-/// Extension methods for `Generics`
-pub trait ExtendGenerics<T> {
-	fn new(body: T) -> Self;
-}
-
-impl<T> ExtendGenerics<T> for Generics<T> {
-	fn new(body: T) -> Self {
-		Self {
-			open_angle: LessThan,
-			body,
-			close_angle: GreaterThan,
-		}
-	}
-}
-
 /// Extension methods for `PromiseType`
 pub trait ExtendPromiseType<'a> {
 	fn new(ty: ReturnType<'a>) -> Self;
@@ -385,18 +371,6 @@ mod extend_integer {
 
 		let int2 = IntegerType::LongLong(LongLongType::new_signed());
 		assert_eq!(int2.unsigned(), None);
-	}
-}
-
-#[cfg(test)]
-mod extend_generics {
-	use crate::{ExtendGenerics, ExtendType};
-	use weedle::common::Generics;
-	use weedle::types::Type;
-
-	#[test]
-	fn test_new() {
-		assert_eq!(Generics::new(Type::single_any()).body, Type::single_any(),);
 	}
 }
 
