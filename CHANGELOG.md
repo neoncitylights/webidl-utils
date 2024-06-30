@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1 (2024-06-30)
+
+### Documentation
+- Fixed a minor typo in documentation for `ExtendPunctuatedNonEmpty` trait ([#20](https://github.com/neoncitylights/webidl-utils/pull/20))
+
 ## 0.2.0 (2024-06-29)
 
 ### Bugfixes
