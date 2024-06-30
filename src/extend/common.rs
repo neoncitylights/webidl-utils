@@ -68,7 +68,7 @@ impl<T, S> ExtendPuncutated<T, S> for Punctuated<T, S> {
 	}
 }
 
-/// Extension methods for `Punctuated`
+/// Extension methods for `PunctuatedNonEmpty`
 pub trait ExtendPuncutatedNonEmpty<T, S> {
 	fn new(list: Vec<T>, separator: S) -> Self;
 }
