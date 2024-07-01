@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0 (2024-06-30)
+
+### Features
+- Add `ExtendParenthesized` trait
+
 ## 0.2.1 (2024-06-30)
 
 ### Documentation

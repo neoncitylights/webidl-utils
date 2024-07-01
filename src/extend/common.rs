@@ -1,17 +1,14 @@
-use weedle::common::{Braced, Bracketed, Docstring, Generics, Punctuated, PunctuatedNonEmpty};
-use weedle::term::{CloseBrace, CloseBracket, GreaterThan, LessThan, OpenBrace, OpenBracket};
-
 /// Extension methods for `Braced`
 pub trait ExtendBraced<T> {
 	fn new(body: T) -> Self;
 }
 
-impl<T> ExtendBraced<T> for Braced<T> {
+impl<T> ExtendBraced<T> for weedle::common::Braced<T> {
 	fn new(body: T) -> Self {
 		Self {
-			open_brace: OpenBrace,
+			open_brace: weedle::term::OpenBrace,
 			body,
-			close_brace: CloseBrace,
+			close_brace: weedle::term::CloseBrace,
 		}
 	}
 }
@@ -21,12 +18,12 @@ pub trait ExtendBracketed<T> {
 	fn new(body: T) -> Self;
 }
 
-impl<T> ExtendBracketed<T> for Bracketed<T> {
+impl<T> ExtendBracketed<T> for weedle::common::Bracketed<T> {
 	fn new(body: T) -> Self {
 		Self {
-			open_bracket: OpenBracket,
+			open_bracket: weedle::term::OpenBracket,
 			body,
-			close_bracket: CloseBracket,
+			close_bracket: weedle::term::CloseBracket,
 		}
 	}
 }
@@ -36,9 +33,9 @@ pub trait ExtendDocstring {
 	fn new(s: &str) -> Self;
 }
 
-impl ExtendDocstring for Docstring {
+impl ExtendDocstring for weedle::common::Docstring {
 	fn new(s: &str) -> Self {
-		Docstring(String::from(s))
+		Self(String::from(s))
 	}
 }
 
@@ -47,12 +44,27 @@ pub trait ExtendGenerics<T> {
 	fn new(body: T) -> Self;
 }
 
-impl<T> ExtendGenerics<T> for Generics<T> {
+impl<T> ExtendGenerics<T> for weedle::common::Generics<T> {
 	fn new(body: T) -> Self {
 		Self {
-			open_angle: LessThan,
+			open_angle: weedle::term::LessThan,
 			body,
-			close_angle: GreaterThan,
+			close_angle: weedle::term::GreaterThan,
+		}
+	}
+}
+
+/// Extension methods for `Parenthesized`
+pub trait ExtendParenthesized<T> {
+	fn new(body: T) -> Self;
+}
+
+impl<T> ExtendParenthesized<T> for weedle::common::Parenthesized<T> {
+	fn new(body: T) -> Self {
+		Self {
+			open_paren: weedle::term::OpenParen,
+			body,
+			close_paren: weedle::term::CloseParen,
 		}
 	}
 }
@@ -62,7 +74,7 @@ pub trait ExtendPuncutated<T, S> {
 	fn new(list: Vec<T>, separator: S) -> Self;
 }
 
-impl<T, S> ExtendPuncutated<T, S> for Punctuated<T, S> {
+impl<T, S> ExtendPuncutated<T, S> for weedle::common::Punctuated<T, S> {
 	fn new(list: Vec<T>, separator: S) -> Self {
 		Self { list, separator }
 	}
@@ -73,7 +85,7 @@ pub trait ExtendPuncutatedNonEmpty<T, S> {
 	fn new(list: Vec<T>, separator: S) -> Self;
 }
 
-impl<T, S> ExtendPuncutatedNonEmpty<T, S> for PunctuatedNonEmpty<T, S> {
+impl<T, S> ExtendPuncutatedNonEmpty<T, S> for weedle::common::PunctuatedNonEmpty<T, S> {
 	fn new(list: Vec<T>, separator: S) -> Self {
 		Self { list, separator }
 	}
@@ -119,8 +131,22 @@ mod extend_generics {
 	use weedle::types::Type;
 
 	#[test]
-	fn test_new() {
+	fn test() {
 		assert_eq!(Generics::new(Type::single_any()).body, Type::single_any());
+	}
+}
+
+#[cfg(test)]
+mod extend_parenthesized {
+	use crate::ExtendParenthesized;
+	use weedle::common::{Identifier, Parenthesized};
+
+	#[test]
+	fn test() {
+		assert_eq!(
+			Parenthesized::new(Identifier("Foo")).body,
+			Identifier("Foo")
+		);
 	}
 }
 
