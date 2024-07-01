@@ -3,7 +3,7 @@
 ## 0.3.0 (2024-06-30)
 
 ### Features
-- Add `ExtendParenthesized` trait
+- Add `ExtendParenthesized` trait ([#21](https://github.com/neoncitylights/webidl-utils/pull/21))
 
 ## 0.2.1 (2024-06-30)
 
