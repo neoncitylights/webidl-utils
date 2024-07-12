@@ -1,4 +1,4 @@
-use crate::ExtendMayBeNull;
+use crate::extend::ExtendMayBeNull;
 use weedle::common::Identifier;
 use weedle::term::*;
 use weedle::types::*;
@@ -336,7 +336,7 @@ impl<'a> ExtendNonAnyType<'a> for NonAnyType<'a> {
 
 #[cfg(test)]
 mod extend_non_any {
-	use crate::{
+	use crate::extend::{
 		ExtendFloatingPointTypeNew, ExtendFrozenArrayType, ExtendIntegerTypeNew, ExtendNonAnyType,
 		ExtendPromiseType, ExtendRecordKeyType, ExtendRecordType, ExtendSequenceType, ExtendType,
 	};

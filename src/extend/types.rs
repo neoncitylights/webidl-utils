@@ -1,4 +1,4 @@
-use crate::ExtendGenerics;
+use crate::extend::ExtendGenerics;
 use weedle::common::Generics;
 use weedle::term::*;
 use weedle::types::*;
@@ -302,7 +302,7 @@ impl<'a> ExtendSingleType for SingleType<'a> {
 
 #[cfg(test)]
 mod extend_maybenull {
-	use crate::ExtendMayBeNull;
+	use crate::extend::ExtendMayBeNull;
 	use weedle::term::{Boolean, Byte, QMark};
 	use weedle::types::MayBeNull;
 
@@ -323,7 +323,7 @@ mod extend_maybenull {
 
 #[cfg(test)]
 mod extend_float {
-	use crate::{ExtendFloatingPointType, ExtendFloatingPointTypeNew};
+	use crate::extend::{ExtendFloatingPointType, ExtendFloatingPointTypeNew};
 	use weedle::term::Unrestricted;
 	use weedle::types::{DoubleType, FloatType, FloatingPointType};
 
@@ -342,7 +342,7 @@ mod extend_float {
 
 #[cfg(test)]
 mod extend_integer {
-	use crate::{ExtendIntegerType, ExtendIntegerTypeNew};
+	use crate::extend::{ExtendIntegerType, ExtendIntegerTypeNew};
 	use weedle::term::Unsigned;
 	use weedle::types::{IntegerType, LongLongType, LongType, ShortType};
 
@@ -376,7 +376,7 @@ mod extend_integer {
 
 #[cfg(test)]
 mod extend_promise {
-	use crate::{ExtendGenerics, ExtendNonAnyType, ExtendPromiseType};
+	use crate::extend::{ExtendGenerics, ExtendNonAnyType, ExtendPromiseType};
 	use weedle::common::Generics;
 	use weedle::term::Promise;
 	use weedle::types::{NonAnyType, PromiseType, ReturnType, SingleType, Type};
@@ -399,7 +399,7 @@ mod extend_promise {
 
 #[cfg(test)]
 mod extend_frozen_array {
-	use crate::{ExtendFrozenArrayType, ExtendGenerics, ExtendNonAnyType};
+	use crate::extend::{ExtendFrozenArrayType, ExtendGenerics, ExtendNonAnyType};
 	use weedle::common::Generics;
 	use weedle::term::FrozenArray;
 	use weedle::types::{FrozenArrayType, NonAnyType, SingleType, Type};
@@ -420,7 +420,7 @@ mod extend_frozen_array {
 
 #[cfg(test)]
 mod extend_record {
-	use crate::{ExtendRecordKeyType, ExtendRecordType, ExtendType};
+	use crate::extend::{ExtendRecordKeyType, ExtendRecordType, ExtendType};
 	use weedle::types::{RecordKeyType, RecordType, Type};
 
 	#[test]
@@ -434,7 +434,7 @@ mod extend_record {
 
 #[cfg(test)]
 mod extend_record_key {
-	use crate::{ExtendNonAnyType, ExtendRecordKeyType};
+	use crate::extend::{ExtendNonAnyType, ExtendRecordKeyType};
 	use weedle::term::{Boolean, ByteString, DOMString, USVString};
 	use weedle::types::{MayBeNull, NonAnyType, RecordKeyType};
 
