@@ -93,7 +93,7 @@ impl<T, S> ExtendPuncutatedNonEmpty<T, S> for weedle::common::PunctuatedNonEmpty
 
 #[cfg(test)]
 mod extend_braced {
-	use crate::ExtendBraced;
+	use crate::extend::ExtendBraced;
 	use weedle::common::{Braced, Identifier};
 
 	#[test]
@@ -104,7 +104,7 @@ mod extend_braced {
 
 #[cfg(test)]
 mod extend_bracketed {
-	use crate::ExtendBracketed;
+	use crate::extend::ExtendBracketed;
 	use weedle::common::{Bracketed, Identifier};
 
 	#[test]
@@ -115,7 +115,7 @@ mod extend_bracketed {
 
 #[cfg(test)]
 mod extend_docstring {
-	use crate::ExtendDocstring;
+	use crate::extend::ExtendDocstring;
 	use weedle::common::Docstring;
 
 	#[test]
@@ -126,7 +126,7 @@ mod extend_docstring {
 
 #[cfg(test)]
 mod extend_generics {
-	use crate::{ExtendGenerics, ExtendType};
+	use crate::extend::{ExtendGenerics, ExtendType};
 	use weedle::common::Generics;
 	use weedle::types::Type;
 
@@ -138,7 +138,7 @@ mod extend_generics {
 
 #[cfg(test)]
 mod extend_parenthesized {
-	use crate::ExtendParenthesized;
+	use crate::extend::ExtendParenthesized;
 	use weedle::common::{Identifier, Parenthesized};
 
 	#[test]
@@ -152,7 +152,7 @@ mod extend_parenthesized {
 
 #[cfg(test)]
 mod extend_punctuated {
-	use crate::ExtendPuncutated;
+	use crate::extend::ExtendPuncutated;
 	use weedle::common::Punctuated;
 	use weedle::term::Comma;
 
@@ -165,7 +165,7 @@ mod extend_punctuated {
 
 #[cfg(test)]
 mod extend_punctuated_non_empty {
-	use crate::ExtendPuncutatedNonEmpty;
+	use crate::extend::ExtendPuncutatedNonEmpty;
 	use weedle::common::PunctuatedNonEmpty;
 	use weedle::term::Comma;
 

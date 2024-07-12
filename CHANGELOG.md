@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased (YYYY-MM-DD)
+
+### Breaking changes
+- All traits are now under their own module instead of the root, based on their name.
+  - Traits with a name that start with `Extend` are now under the `webidl_utils::extend` module.
+  - Traits with a name that start with `Symbol` are now under the `webidl_utils::symbol` module.
+
 ## 0.3.0 (2024-06-30)
 
 ### Features
