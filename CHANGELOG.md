@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased (YYYY-MM-DD)
+## 0.4.0 (2024-07-12)
 
 ### Breaking changes
 - All traits are now under their own module instead of the root, based on their name. ([#22](https://github.com/neoncitylights/webidl-utils/pull/22)
