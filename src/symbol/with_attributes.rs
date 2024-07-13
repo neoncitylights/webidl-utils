@@ -9,6 +9,7 @@ use weedle::*;
 /// A WebIDL symbol that may have 0 or more extended attributes
 pub trait SymbolWithAttributes<'a> {
 	fn attributes(self) -> Option<weedle::attribute::ExtendedAttributeList<'a>>;
+	fn has_attributes(&self) -> bool;
 }
 
 macro_rules! impl_symbol_with_attributes {
@@ -17,6 +18,10 @@ macro_rules! impl_symbol_with_attributes {
 			impl<'a> SymbolWithAttributes<'a> for $sym<'a> {
 				fn attributes(self) -> Option<weedle::attribute::ExtendedAttributeList<'a>> {
 					self.attributes
+				}
+
+				fn has_attributes(&self) -> bool {
+					self.attributes.is_some()
 				}
 			}
 		)+
