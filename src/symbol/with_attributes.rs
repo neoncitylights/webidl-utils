@@ -72,11 +72,13 @@ mod tests {
 
 	#[test]
 	fn test_enum_definition() {
-		let (_, enum_def) = EnumDefinition::parse(r#"
+		let (_, enum_def) = EnumDefinition::parse(
+			r#"
 				[Exposed=Window]
 				enum Color { "red", "green", "blue" };
-			"#)
-			.expect("EnumDefinition parsed with an error");
+			"#,
+		)
+		.expect("EnumDefinition parsed with an error");
 
 		assert_eq!(enum_def.has_attributes(), true);
 	}
