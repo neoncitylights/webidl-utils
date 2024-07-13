@@ -4,7 +4,7 @@ use weedle::namespace::{AttributeNamespaceMember, OperationNamespaceMember};
 use weedle::*;
 
 /// A WebIDL symbol that may have a documentation string
-pub trait SymbolWithDocString {
+pub trait SymbolWithDocstring {
 	/// Returns a string literal with the starting whitespace removed.
 	/// If the symbol has no docstring, it will return an empty string literal.
 	///
@@ -23,7 +23,7 @@ pub trait SymbolWithDocString {
 	///    - It will normalize strings by removing the beginning whitespace.
 	///
 	/// ```
-	/// use webidl_utils::symbol::SymbolWithDocString;
+	/// use webidl_utils::symbol::SymbolWithDocstring;
 	/// use weedle::{EnumDefinition, Parse};
 	///
 	/// let (_, enum_def) = EnumDefinition::parse(
@@ -46,7 +46,7 @@ pub trait SymbolWithDocString {
 macro_rules! impl_symbol_with_docstring {
 	($($sym:ident),+ $(,)?) => {
 		$(
-			impl<'a> SymbolWithDocString for $sym<'a> {
+			impl<'a> SymbolWithDocstring for $sym<'a> {
 				fn docstring(&self) -> &str {
 					self.docstring.as_ref()
 						.map(|docstring| &docstring.0[..])
@@ -78,7 +78,7 @@ impl_symbol_with_docstring!(
 
 #[cfg(test)]
 mod tests {
-	use crate::symbol::SymbolWithDocString;
+	use crate::symbol::SymbolWithDocstring;
 	use weedle::{EnumDefinition, Parse};
 
 	#[test]
