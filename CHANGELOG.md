@@ -16,6 +16,14 @@
   - Renamed `ExtendPuncutatedNonEmpty` to `ExtendPunctuatedNonEmpty`.
   - **Note**: While this is technically a "bug fix", this is moreso considered a breaking change because it's changing the trait name as part of the public API.
 
+### Internal changes
+- Expanded code coverage for the implementations of several traits. ([#28](https://github.com/neoncitylights/webidl-utils/pull/28))
+  - `SymbolWithIdentifier`
+  - `SymbolWithIdentifierLhs`
+  - `SymbolWithIdentifierRhs`
+  - `SymbolWithOptionalIdentifier`
+  - `SymbolWithReadOnly`
+
 ## 0.4.0 (2024-07-12)
 
 ### Breaking changes
