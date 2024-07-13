@@ -64,3 +64,20 @@ impl_symbol_with_attributes!(
 	AttributedType,
 	AttributedNonAnyType,
 );
+
+#[cfg(test)]
+mod tests {
+	use crate::symbol::SymbolWithAttributes;
+	use weedle::{EnumDefinition, Parse};
+
+	#[test]
+	fn test_enum_definition() {
+		let (_, enum_def) = EnumDefinition::parse(r#"
+				[Exposed=Window]
+				enum Color { "red", "green", "blue" };
+			"#)
+			.expect("EnumDefinition parsed with an error");
+
+		assert_eq!(enum_def.has_attributes(), true);
+	}
+}
