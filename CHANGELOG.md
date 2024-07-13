@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.0 (2024-07-12)
+## Unreleased (YYYY-MM-DD)
 
 ### Breaking changes
 - Fixed typo in trait names. **Note**: While this is technically a "bug fix", this is moreso considered a breaking change because it's changing the trait name as part of the public API.
