@@ -71,14 +71,12 @@ mod test_identifier2 {
 			parse("FooBar implements Foo;")
 			.expect("WebIDL content parsed with an error");
 
-		for def in defs {
-			match def {
-				Definition::Implements(i) => {
-					assert_eq!(i.lhs_identifier(), Identifier("FooBar"));
-					assert_eq!(i.rhs_identifier(), Identifier("Foo"));
-				}
-				_ => unreachable!(),
-			}
+		let def = &defs[0];
+		if let Definition::Implements(i) = def {
+			assert_eq!(i.lhs_identifier(), Identifier("FooBar"));
+			assert_eq!(i.rhs_identifier(), Identifier("Foo"));
+		} else {
+			panic!("Expected an Implements definition");
 		}
 	}
 }
