@@ -5,6 +5,7 @@ use weedle::namespace::OperationNamespaceMember;
 /// A WebIDL symbol that may have an identifier
 pub trait SymbolWithOptionalIdentifier<'a> {
 	fn identifier(&self) -> Option<weedle::common::Identifier<'a>>;
+	fn has_identifier(&self) -> bool;
 }
 
 macro_rules! impl_symbol_with_optional_identifier {
@@ -13,6 +14,10 @@ macro_rules! impl_symbol_with_optional_identifier {
 			impl<'a> SymbolWithOptionalIdentifier<'a> for $sym<'a> {
 				fn identifier(&self) -> Option<weedle::common::Identifier<'a>> {
 					self.identifier
+				}
+
+				fn has_identifier(&self) -> bool {
+					self.identifier.is_some()
 				}
 			}
 		)+
@@ -40,5 +45,6 @@ mod tests {
 		.expect("OperationInterfaceMember parsed with an error");
 
 		assert_eq!(output.identifier(), Some(Identifier("isTypeSupported")));
+		assert!(output.has_identifier());
 	}
 }

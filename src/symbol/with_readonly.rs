@@ -4,6 +4,8 @@ use weedle::mixin::AttributeMixinMember;
 /// A WebIDL symbol that may have a readonly modifier
 pub trait SymbolWithReadOnly {
 	fn readonly(&self) -> Option<weedle::term::ReadOnly>;
+	fn is_readonly(&self) -> bool;
+	fn is_not_readonly(&self) -> bool;
 }
 
 macro_rules! impl_symbol_with_readonly {
@@ -12,6 +14,14 @@ macro_rules! impl_symbol_with_readonly {
 			impl<'a> SymbolWithReadOnly for $sym<'a> {
 				fn readonly(&self) -> Option<weedle::term::ReadOnly> {
 					self.readonly
+				}
+
+				fn is_readonly(&self) -> bool {
+					self.readonly.is_some()
+				}
+
+				fn is_not_readonly(&self) -> bool {
+					self.readonly.is_none()
 				}
 			}
 		)+
@@ -37,5 +47,7 @@ mod tests {
 			.expect("AttributeInterfaceMember parsed with an error");
 
 		assert!(member.readonly().is_some());
+		assert!(member.is_readonly());
+		assert!(!member.is_not_readonly());
 	}
 }
