@@ -2,6 +2,9 @@
 
 ## Unreleased (YYYY-MM-DD)
 
+### Features
+- Implemented the traits `SymbolWithIdentifier` and `SymbolWithAttributes` for type `PartialNamespaceDefinition`.
+
 ### Breaking changes
 - Fixed typo in trait names. ([#24](https://github.com/neoncitylights/webidl-utils/pull/24))
   - Renamed `ExtendPuncutated` to `ExtendPunctuated`.

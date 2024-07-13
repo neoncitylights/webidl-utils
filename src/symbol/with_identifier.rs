@@ -33,6 +33,7 @@ impl_symbol_with_identifier!(
 	PartialDictionaryDefinition,
 	PartialInterfaceDefinition,
 	PartialInterfaceMixinDefinition,
+	PartialNamespaceDefinition,
 	TypedefDefinition,
 	SingleArgument,
 	VariadicArgument,
