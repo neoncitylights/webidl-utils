@@ -9,6 +9,7 @@ use weedle::*;
 /// A WebIDL symbol that may have 0 or more extended attributes
 pub trait SymbolWithAttributes<'a> {
 	fn attributes(self) -> Option<weedle::attribute::ExtendedAttributeList<'a>>;
+	fn has_attributes(&self) -> bool;
 }
 
 macro_rules! impl_symbol_with_attributes {
@@ -17,6 +18,10 @@ macro_rules! impl_symbol_with_attributes {
 			impl<'a> SymbolWithAttributes<'a> for $sym<'a> {
 				fn attributes(self) -> Option<weedle::attribute::ExtendedAttributeList<'a>> {
 					self.attributes
+				}
+
+				fn has_attributes(&self) -> bool {
+					self.attributes.is_some()
 				}
 			}
 		)+
@@ -59,3 +64,22 @@ impl_symbol_with_attributes!(
 	AttributedType,
 	AttributedNonAnyType,
 );
+
+#[cfg(test)]
+mod tests {
+	use crate::symbol::SymbolWithAttributes;
+	use weedle::{EnumDefinition, Parse};
+
+	#[test]
+	fn test_enum_definition() {
+		let (_, enum_def) = EnumDefinition::parse(
+			r#"
+				[Exposed=Window]
+				enum Color { "red", "green", "blue" };
+			"#,
+		)
+		.expect("EnumDefinition parsed with an error");
+
+		assert_eq!(enum_def.has_attributes(), true);
+	}
+}
