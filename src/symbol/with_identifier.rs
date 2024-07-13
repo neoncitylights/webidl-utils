@@ -51,3 +51,16 @@ impl_symbol_with_identifier!(
 	AttributeNamespaceMember,
 	Inheritance,
 );
+
+#[cfg(test)]
+mod test_with_identifier {
+	use crate::symbol::SymbolWithIdentifier;
+	use weedle::attribute::ExtendedAttributeNoArgs;
+	use weedle::common::Identifier;
+
+	#[test]
+	fn test_extended_attribute_no_args() {
+		let test = ExtendedAttributeNoArgs(Identifier("FooBar"));
+		assert_eq!(test.identifier(), Identifier("FooBar"));
+	}
+}
