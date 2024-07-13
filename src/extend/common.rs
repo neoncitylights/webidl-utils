@@ -30,17 +30,12 @@ impl<T> ExtendBracketed<T> for weedle::common::Bracketed<T> {
 
 /// Extension methods for `Docstring`
 pub trait ExtendDocstring {
-	fn new<T>(s: T) -> Self
-	where
-		T: Into<String>;
+	fn new(s: &str) -> Self;
 	fn as_str(&self) -> &str;
 }
 
 impl ExtendDocstring for weedle::common::Docstring {
-	fn new<T>(s: T) -> Self
-	where
-		T: Into<String>,
-	{
+	fn new(s: &str) -> Self {
 		Self(s.into())
 	}
 
