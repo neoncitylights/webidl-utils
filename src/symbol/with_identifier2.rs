@@ -2,7 +2,10 @@ use weedle::attribute::{ExtendedAttributeIdent, ExtendedAttributeNamedArgList};
 use weedle::{ImplementsDefinition, IncludesStatementDefinition};
 
 /// A WebIDL symbol with 2 identifiers on the left and right side
-pub trait SymbolWithIdentifier2<'a>: SymbolWithIdentifierLhs<'a> + SymbolWithIdentifierRhs<'a> {}
+pub trait SymbolWithIdentifier2<'a>:
+	SymbolWithIdentifierLhs<'a> + SymbolWithIdentifierRhs<'a>
+{
+}
 
 /// A WebIDL symbol with a left-hand side identifier
 pub trait SymbolWithIdentifierRhs<'a> {
