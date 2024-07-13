@@ -4,6 +4,7 @@
 
 ### Features
 - Implemented the traits `SymbolWithIdentifier` and `SymbolWithAttributes` for type `PartialNamespaceDefinition`. ([#25](https://github.com/neoncitylights/webidl-utils/pull/25))
+- Implemented the trait `SymbolWithIdentifier` for `ExtendedAttributeNoArgs` and `Inheritance`.
 
 ### Breaking changes
 - Fixed typo in trait names. ([#24](https://github.com/neoncitylights/webidl-utils/pull/24))

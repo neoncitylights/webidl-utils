@@ -1,6 +1,7 @@
 use weedle::argument::{SingleArgument, VariadicArgument};
+use weedle::attribute::ExtendedAttributeNoArgs;
 use weedle::dictionary::DictionaryMember;
-use weedle::interface::{AttributeInterfaceMember, ConstMember};
+use weedle::interface::{AttributeInterfaceMember, ConstMember, Inheritance};
 use weedle::mixin::AttributeMixinMember;
 use weedle::namespace::AttributeNamespaceMember;
 use weedle::*;
@@ -19,6 +20,12 @@ macro_rules! impl_symbol_with_identifier {
 				}
 			}
 		)+
+	}
+}
+
+impl<'a> SymbolWithIdentifier<'a> for ExtendedAttributeNoArgs<'a> {
+	fn identifier(&self) -> weedle::common::Identifier<'a> {
+		self.0
 	}
 }
 
@@ -42,4 +49,5 @@ impl_symbol_with_identifier!(
 	AttributeInterfaceMember,
 	AttributeMixinMember,
 	AttributeNamespaceMember,
+	Inheritance,
 );
