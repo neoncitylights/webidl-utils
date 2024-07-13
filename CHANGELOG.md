@@ -15,7 +15,7 @@
   - `SymbolWithOptionalIdentifier::has_identifier()`
   - `SymbolWithReadOnly::is_readonly()`
   - `SymbolWithReadOnly::is_not_readonly()`
-- Added `SymbolWithAttributes::has_attributes()`
+- Added `SymbolWithAttributes::has_attributes()` ([#30](https://github.com/neoncitylights/webidl-utils/pull/30))
 
 ### Breaking changes
 - Fixed typo in trait names. ([#24](https://github.com/neoncitylights/webidl-utils/pull/24))
