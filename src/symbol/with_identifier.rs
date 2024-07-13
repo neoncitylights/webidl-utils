@@ -11,6 +11,12 @@ pub trait SymbolWithIdentifier<'a> {
 	fn identifier(&self) -> weedle::common::Identifier<'a>;
 }
 
+impl<'a> SymbolWithIdentifier<'a> for ExtendedAttributeNoArgs<'a> {
+	fn identifier(&self) -> weedle::common::Identifier<'a> {
+		self.0
+	}
+}
+
 macro_rules! impl_symbol_with_identifier {
 	($($sym:ident),+ $(,)?) => {
 		$(
@@ -20,12 +26,6 @@ macro_rules! impl_symbol_with_identifier {
 				}
 			}
 		)+
-	}
-}
-
-impl<'a> SymbolWithIdentifier<'a> for ExtendedAttributeNoArgs<'a> {
-	fn identifier(&self) -> weedle::common::Identifier<'a> {
-		self.0
 	}
 }
 
