@@ -6,15 +6,27 @@
 - Implemented the traits `SymbolWithIdentifier` and `SymbolWithAttributes` for type `PartialNamespaceDefinition`. ([#25](https://github.com/neoncitylights/webidl-utils/pull/25))
 - Implemented the trait `SymbolWithIdentifier` for `ExtendedAttributeNoArgs` and `Inheritance`. ([#27](https://github.com/neoncitylights/webidl-utils/pull/27))
 - Added 3 traits for symbols with a sided identifier ([#26](https://github.com/neoncitylights/webidl-utils/pull/26))
-  - `SymbolWithIdentifier2` trait, for WebIDL symbol defined with 2 identifiers on the left and right side.
+  - `SymbolWithIdentifier2` trait, for WebIDL symbol defined with 2 identifiers on the left and right side
   - `SymbolWithIdentifierLhs`, for WebIDL symbols with an identifier on the left-hand side
   - `SymbolWithIdentifierRhs`, for WebIDL symbols with an identifier on the right-hand side
+- Added new methods to traits ([#29](https://github.com/neoncitylights/webidl-utils/pull/29))
+  - `ExtendDocstring::as_str()`
+  - `SymbolWithDocstring::has_docstring()`
+  - `SymbolWithOptionalIdentifier::has_identifier()`
+  - `SymbolWithReadOnly::is_readonly()`
+  - `SymbolWithReadOnly::is_not_readonly()`
 
 ### Breaking changes
 - Fixed typo in trait names. ([#24](https://github.com/neoncitylights/webidl-utils/pull/24))
   - Renamed `ExtendPuncutated` to `ExtendPunctuated`.
   - Renamed `ExtendPuncutatedNonEmpty` to `ExtendPunctuatedNonEmpty`.
   - **Note**: While this is technically a "bug fix", this is moreso considered a breaking change because it's changing the trait name as part of the public API.
+- Renamed `SymbolWithDocString` to `SymbolWithDocstring`, to stay consistent with the name casing of `weedle2::common::Docstring`. ([#29](https://github.com/neoncitylights/webidl-utils/pull/29))
+- Changed the method signature of `SymbolWithDocString::docstring()` to self-borrow and return a `&str`. ([#29](https://github.com/neoncitylights/webidl-utils/pull/29))
+  ```diff
+  - fn docstring(self) -> Option<Docstring>;
+  + fn docstring(&self) -> &str;
+  ```
 
 ### Internal changes
 - Expanded code coverage for the implementations of several traits. ([#28](https://github.com/neoncitylights/webidl-utils/pull/28))

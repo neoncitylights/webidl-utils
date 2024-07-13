@@ -31,11 +31,16 @@ impl<T> ExtendBracketed<T> for weedle::common::Bracketed<T> {
 /// Extension methods for `Docstring`
 pub trait ExtendDocstring {
 	fn new(s: &str) -> Self;
+	fn as_str(&self) -> &str;
 }
 
 impl ExtendDocstring for weedle::common::Docstring {
 	fn new(s: &str) -> Self {
-		Self(String::from(s))
+		Self(s.into())
+	}
+
+	fn as_str(&self) -> &str {
+		self.0.as_str()
 	}
 }
 
@@ -121,6 +126,7 @@ mod extend_docstring {
 	#[test]
 	fn test() {
 		assert_eq!(Docstring::new("Foo").0, String::from("Foo"));
+		assert_eq!(Docstring::new("Foo").as_str(), "Foo");
 	}
 }
 
