@@ -1,6 +1,7 @@
 use weedle::argument::{SingleArgument, VariadicArgument};
+use weedle::attribute::ExtendedAttributeNoArgs;
 use weedle::dictionary::DictionaryMember;
-use weedle::interface::{AttributeInterfaceMember, ConstMember};
+use weedle::interface::{AttributeInterfaceMember, ConstMember, Inheritance};
 use weedle::mixin::AttributeMixinMember;
 use weedle::namespace::AttributeNamespaceMember;
 use weedle::*;
@@ -8,6 +9,12 @@ use weedle::*;
 /// A WebIDL symbol with an identifier
 pub trait SymbolWithIdentifier<'a> {
 	fn identifier(&self) -> weedle::common::Identifier<'a>;
+}
+
+impl<'a> SymbolWithIdentifier<'a> for ExtendedAttributeNoArgs<'a> {
+	fn identifier(&self) -> weedle::common::Identifier<'a> {
+		self.0
+	}
 }
 
 macro_rules! impl_symbol_with_identifier {
@@ -42,4 +49,18 @@ impl_symbol_with_identifier!(
 	AttributeInterfaceMember,
 	AttributeMixinMember,
 	AttributeNamespaceMember,
+	Inheritance,
 );
+
+#[cfg(test)]
+mod test_with_identifier {
+	use crate::symbol::SymbolWithIdentifier;
+	use weedle::attribute::ExtendedAttributeNoArgs;
+	use weedle::common::Identifier;
+
+	#[test]
+	fn test_extended_attribute_no_args() {
+		let test = ExtendedAttributeNoArgs(Identifier("FooBar"));
+		assert_eq!(test.identifier(), Identifier("FooBar"));
+	}
+}
