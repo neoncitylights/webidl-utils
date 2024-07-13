@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"trait":["SymbolWithAttributes","SymbolWithDocstring","SymbolWithGenerics","SymbolWithIdentifier","SymbolWithIdentifier2","SymbolWithIdentifierLhs","SymbolWithIdentifierRhs","SymbolWithOptionalIdentifier","SymbolWithReadOnly","SymbolWithReturnType","SymbolWithType"]};
