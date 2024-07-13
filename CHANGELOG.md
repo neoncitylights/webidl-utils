@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased (YYYY-MM-DD)
+## 0.4.0 (2024-07-12)
 
 ### Breaking changes
 - Fixed typo in trait names. **Note**: While this is technically a "bug fix", this is moreso considered a breaking change because it's changing the trait name as part of the public API.
@@ -10,7 +10,7 @@
 ## 0.4.0 (2024-07-12)
 
 ### Breaking changes
-- All traits are now under their own module instead of the root, based on their name. ([#22](https://github.com/neoncitylights/webidl-utils/pull/22)
+- All traits are now under their own module instead of the root, based on their name. ([#22](https://github.com/neoncitylights/webidl-utils/pull/22))
   - Traits with a name that start with `Extend` are now under the `webidl_utils::extend` module.
   - Traits with a name that start with `Symbol` are now under the `webidl_utils::symbol` module.
 
