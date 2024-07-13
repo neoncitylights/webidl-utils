@@ -1,6 +1,21 @@
 # Changelog
 
 ## Unreleased (YYYY-MM-DD)
+No changes yet.
+
+## 0.5.0 (2024-07-13)
+
+### Breaking changes
+- Fixed typo in trait names. ([#24](https://github.com/neoncitylights/webidl-utils/pull/24))
+  - Renamed `ExtendPuncutated` to `ExtendPunctuated`.
+  - Renamed `ExtendPuncutatedNonEmpty` to `ExtendPunctuatedNonEmpty`.
+  - **Note**: While this is technically a "bug fix", this is moreso considered a breaking change because it's changing the trait name as part of the public API.
+- Renamed `SymbolWithDocString` to `SymbolWithDocstring`, to stay consistent with the name casing of `weedle2::common::Docstring`. ([#29](https://github.com/neoncitylights/webidl-utils/pull/29))
+- Changed the method signature of `SymbolWithDocstring::docstring()` to self-borrow and return a `&str`. ([#29](https://github.com/neoncitylights/webidl-utils/pull/29))
+  ```diff
+  - fn docstring(self) -> Option<Docstring>;
+  + fn docstring(&self) -> &str;
+  ```
 
 ### Features
 - Implemented the traits `SymbolWithIdentifier` and `SymbolWithAttributes` for type `PartialNamespaceDefinition`. ([#25](https://github.com/neoncitylights/webidl-utils/pull/25))
@@ -17,18 +32,6 @@
   - `SymbolWithReadOnly::is_not_readonly()`
 - Added `SymbolWithAttributes::has_attributes()` ([#30](https://github.com/neoncitylights/webidl-utils/pull/30))
 
-### Breaking changes
-- Fixed typo in trait names. ([#24](https://github.com/neoncitylights/webidl-utils/pull/24))
-  - Renamed `ExtendPuncutated` to `ExtendPunctuated`.
-  - Renamed `ExtendPuncutatedNonEmpty` to `ExtendPunctuatedNonEmpty`.
-  - **Note**: While this is technically a "bug fix", this is moreso considered a breaking change because it's changing the trait name as part of the public API.
-- Renamed `SymbolWithDocString` to `SymbolWithDocstring`, to stay consistent with the name casing of `weedle2::common::Docstring`. ([#29](https://github.com/neoncitylights/webidl-utils/pull/29))
-- Changed the method signature of `SymbolWithDocString::docstring()` to self-borrow and return a `&str`. ([#29](https://github.com/neoncitylights/webidl-utils/pull/29))
-  ```diff
-  - fn docstring(self) -> Option<Docstring>;
-  + fn docstring(&self) -> &str;
-  ```
-
 ### Internal changes
 - Expanded code coverage for the implementations of several traits. ([#28](https://github.com/neoncitylights/webidl-utils/pull/28))
   - `SymbolWithIdentifier`
@@ -36,6 +39,7 @@
   - `SymbolWithIdentifierRhs`
   - `SymbolWithOptionalIdentifier`
   - `SymbolWithReadOnly`
+- Expanded code coverage for the implementation of `SymbolWithAttributes` ([#30](https://github.com/neoncitylights/webidl-utils/pull/30))
 
 ## 0.4.0 (2024-07-12)
 
