@@ -70,22 +70,22 @@ impl<T> ExtendParenthesized<T> for weedle::common::Parenthesized<T> {
 }
 
 /// Extension methods for `Punctuated`
-pub trait ExtendPuncutated<T, S> {
+pub trait ExtendPunctuated<T, S> {
 	fn new(list: Vec<T>, separator: S) -> Self;
 }
 
-impl<T, S> ExtendPuncutated<T, S> for weedle::common::Punctuated<T, S> {
+impl<T, S> ExtendPunctuated<T, S> for weedle::common::Punctuated<T, S> {
 	fn new(list: Vec<T>, separator: S) -> Self {
 		Self { list, separator }
 	}
 }
 
 /// Extension methods for `PunctuatedNonEmpty`
-pub trait ExtendPuncutatedNonEmpty<T, S> {
+pub trait ExtendPunctuatedNonEmpty<T, S> {
 	fn new(list: Vec<T>, separator: S) -> Self;
 }
 
-impl<T, S> ExtendPuncutatedNonEmpty<T, S> for weedle::common::PunctuatedNonEmpty<T, S> {
+impl<T, S> ExtendPunctuatedNonEmpty<T, S> for weedle::common::PunctuatedNonEmpty<T, S> {
 	fn new(list: Vec<T>, separator: S) -> Self {
 		Self { list, separator }
 	}
@@ -152,7 +152,7 @@ mod extend_parenthesized {
 
 #[cfg(test)]
 mod extend_punctuated {
-	use crate::extend::ExtendPuncutated;
+	use crate::extend::ExtendPunctuated;
 	use weedle::common::Punctuated;
 	use weedle::term::Comma;
 
@@ -165,7 +165,7 @@ mod extend_punctuated {
 
 #[cfg(test)]
 mod extend_punctuated_non_empty {
-	use crate::extend::ExtendPuncutatedNonEmpty;
+	use crate::extend::ExtendPunctuatedNonEmpty;
 	use weedle::common::PunctuatedNonEmpty;
 	use weedle::term::Comma;
 
