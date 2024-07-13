@@ -53,14 +53,25 @@ impl_symbol_with_identifier!(
 );
 
 #[cfg(test)]
-mod test_with_identifier {
+mod test {
 	use crate::symbol::SymbolWithIdentifier;
 	use weedle::attribute::ExtendedAttributeNoArgs;
 	use weedle::common::Identifier;
+	use weedle::{CallbackDefinition, Parse};
 
 	#[test]
 	fn test_extended_attribute_no_args() {
 		let test = ExtendedAttributeNoArgs(Identifier("FooBar"));
 		assert_eq!(test.identifier(), Identifier("FooBar"));
+	}
+
+	#[test]
+	fn test_callback_definition() {
+		let (_, callback) = CallbackDefinition::parse(
+			"callback AudioDataOutputCallback = undefined(AudioData output);",
+		)
+		.expect("WebIDL callback parsed with an error");
+
+		assert_eq!(callback.identifier(), Identifier("AudioDataOutputCallback"));
 	}
 }

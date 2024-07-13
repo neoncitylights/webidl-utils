@@ -62,21 +62,15 @@ impl<'a> SymbolWithIdentifier2<'a> for ExtendedAttributeNamedArgList<'a> {}
 mod test_identifier2 {
 	use crate::symbol::{SymbolWithIdentifierLhs, SymbolWithIdentifierRhs};
 	use weedle::common::Identifier;
-	use weedle::{parse, Definition};
+	use weedle::{ImplementsDefinition, Parse};
 
 	#[rustfmt::skip]
 	#[test]
 	fn test_implements_definition() {
-		let defs =
-			parse("FooBar implements Foo;")
+		let (_, implements) = ImplementsDefinition::parse("FooBar implements Foo;")
 			.expect("WebIDL content parsed with an error");
 
-		let def = &defs[0];
-		if let Definition::Implements(i) = def {
-			assert_eq!(i.lhs_identifier(), Identifier("FooBar"));
-			assert_eq!(i.rhs_identifier(), Identifier("Foo"));
-		} else {
-			panic!("Expected an Implements definition");
-		}
+		assert_eq!(implements.lhs_identifier(), Identifier("FooBar"));
+		assert_eq!(implements.rhs_identifier(), Identifier("Foo"));
 	}
 }
