@@ -57,3 +57,28 @@ impl_symbol_with_identifier_rhs!(
 impl<'a> SymbolWithIdentifier2<'a> for ImplementsDefinition<'a> {}
 impl<'a> SymbolWithIdentifier2<'a> for IncludesStatementDefinition<'a> {}
 impl<'a> SymbolWithIdentifier2<'a> for ExtendedAttributeNamedArgList<'a> {}
+
+#[cfg(test)]
+mod test_identifier2 {
+	use crate::symbol::{SymbolWithIdentifierLhs, SymbolWithIdentifierRhs};
+	use weedle::common::Identifier;
+	use weedle::{parse, Definition};
+
+	#[rustfmt::skip]
+	#[test]
+	fn test_implements_definition() {
+		let defs =
+			parse("FooBar implements Foo;")
+			.expect("WebIDL content parsed with an error");
+
+		for def in defs {
+			match def {
+				Definition::Implements(i) => {
+					assert_eq!(i.lhs_identifier(), Identifier("FooBar"));
+					assert_eq!(i.rhs_identifier(), Identifier("Foo"));
+				}
+				_ => unreachable!(),
+			}
+		}
+	}
+}
